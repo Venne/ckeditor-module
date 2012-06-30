@@ -1,0 +1,8 @@
+services:
+	ckeditor.resourcesListener:
+		class: CkeditorModule\Listeners\ResourcesListener
+		tags: [listener]
+
+	ckeditor.formaterListener:
+		class: CkeditorModule\Listeners\FormaterListener
+		tags: [listener]
