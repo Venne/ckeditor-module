@@ -1,7 +1,12 @@
 $(function()
 {
 	var config = {
-		// skin:'v2'
+		filebrowserBrowseUrl : '/venne/www/admin/core/files?lang=cs&panel-tab=2&browserMode=1',
+		filebrowserImageBrowseUrl : '/venne/www/admin/core/files?lang=cs&panel-tab=2&browserMode=1',
+		filebrowserWindowWidth : '1024',
+		filebrowserWindowHeight : '768',
+		skin : 'BootstrapCK-Skin',
+		height: 700
 	};
 
 	function initCkeditor(){
@@ -11,6 +16,12 @@ $(function()
 
 		var ckeditor = $('textarea[venne-form-editor]');
 		var ckeditorInstance = ckeditor.ckeditor(config);
+
+		$( "#cke_frmformEdit-text" ).droppable({
+			drop: function( event, ui ) {
+				alert('yeah');
+			}
+		});
 	}
 
 	$.nette.ext('ckeditor', {

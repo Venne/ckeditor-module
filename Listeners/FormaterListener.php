@@ -26,8 +26,15 @@ class FormaterListener implements EventSubscriber
 	/** @var string */
 	protected $basePath;
 
+	/** @var \Nette\DI\Container */
+	protected $context;
+
+	/**
+	 * @param \Nette\DI\Container|\SystemContainer $context
+	 */
 	function __construct(\Nette\DI\Container $context)
 	{
+		$this->context = $context;
 		$this->basePath = $context->parameters['basePath'];
 	}
 
@@ -42,6 +49,7 @@ class FormaterListener implements EventSubscriber
 		return array(
 			ContentEditorEvents::onContentEditorLoad,
 			ContentEditorEvents::onContentEditorSave,
+			ContentEditorEvents::onContentEditorRender,
 		);
 	}
 
@@ -63,6 +71,17 @@ class FormaterListener implements EventSubscriber
 		$value = preg_replace(array_keys($this->getPatternsSave()), array_merge($this->getPatternsSave()), $value);
 
 		$args->setValue($value);
+	}
+
+
+	public function onContentEditorRender(ContentEditorArgs $args)
+	{
+		$value = $args->getValue();
+
+		$template = $this->context->application->getPresenter()->createTemplate('Nette\Templating\Template');
+		$template->setSource($value);
+
+		$args->setValue($template->__toString());
 	}
 
 
