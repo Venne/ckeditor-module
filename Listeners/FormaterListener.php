@@ -14,8 +14,8 @@ namespace CkeditorModule\Listeners;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Events;
 use Doctrine\ORM\Event\OnFlushEventArgs;
-use CoreModule\Content\Forms\Controls\Events\ContentEditorArgs;
-use CoreModule\Content\Forms\Controls\Events\ContentEditorEvents;
+use CmsModule\Content\Forms\Controls\Events\ContentEditorArgs;
+use CmsModule\Content\Forms\Controls\Events\ContentEditorEvents;
 
 /**
  * @author Josef Kříž <pepakriz@gmail.com>

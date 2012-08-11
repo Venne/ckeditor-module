@@ -1,8 +1,8 @@
 $(function()
 {
 	var config = {
-		filebrowserBrowseUrl : '/venne/www/admin/core/files?lang=cs&panel-tab=2&browserMode=1',
-		filebrowserImageBrowseUrl : '/venne/www/admin/core/files?lang=cs&panel-tab=2&browserMode=1',
+		filebrowserBrowseUrl : '/venne/www/admin/cms/files?lang=cs&panel-tab=2&browserMode=1',
+		filebrowserImageBrowseUrl : '/venne/www/admin/cms/files?lang=cs&panel-tab=2&browserMode=1',
 		filebrowserWindowWidth : '1024',
 		filebrowserWindowHeight : '768',
 		skin : 'BootstrapCK-Skin',

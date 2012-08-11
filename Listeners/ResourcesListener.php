@@ -15,7 +15,7 @@ use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Events;
 use Doctrine\ORM\Event\OnFlushEventArgs;
 use AssetsModule\Managers\AssetManager;
-use CoreModule\Events\RenderEvents;
+use CmsModule\Events\RenderEvents;
 
 /**
  * @author Josef Kříž <pepakriz@gmail.com>
