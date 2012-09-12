@@ -26,7 +26,11 @@ class ResourcesListener implements EventSubscriber
 	/** @var AssetManager */
 	protected $assetManager;
 
-	function __construct(AssetManager $assetManager)
+
+	/**
+	 * @param AssetManager $assetManager
+	 */
+	public function __construct(AssetManager $assetManager)
 	{
 		$this->assetManager = $assetManager;
 	}
@@ -49,6 +53,4 @@ class ResourcesListener implements EventSubscriber
 		$this->assetManager->addJavascript('@CkeditorModule/ckeditor/adapters/jquery.js');
 		$this->assetManager->addJavascript('@CkeditorModule/editor.js');
 	}
-
-
 }
