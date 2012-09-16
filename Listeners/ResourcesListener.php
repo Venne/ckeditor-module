@@ -50,7 +50,6 @@ class ResourcesListener implements EventSubscriber
 	public function onHeadBegin()
 	{
 		$this->assetManager->addJavascript('@CkeditorModule/ckeditor/ckeditor.js');
-		$this->assetManager->addJavascript('@CkeditorModule/ckeditor/adapters/jquery.js');
 		$this->assetManager->addJavascript('@CkeditorModule/editor.js');
 	}
 }
