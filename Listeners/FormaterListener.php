@@ -29,6 +29,7 @@ class FormaterListener implements EventSubscriber
 	/** @var \Nette\DI\Container */
 	protected $context;
 
+
 	/**
 	 * @param \Nette\DI\Container|\SystemContainer $context
 	 */
@@ -88,20 +89,21 @@ class FormaterListener implements EventSubscriber
 	protected function  getPatternsLoad()
 	{
 		return array(
+			'/(<img[^>]*)n:src="([^ "]*)[ ]*,[ ]*size=>\'([^x]*)x([^\']*)\'[^"]*"/' => '${1}src="{$basePath}/public/media/${2}" style="width: ${3}px; height: ${4}px;"',
+			'/(<a[^>]*)n:fhref="([^ "]*)"/' => '${1}href="{$basePath}/public/media/${2}"',
 			'/src="{\$basePath}\//' => 'src="' . $this->basePath . '/',
 			'/href="{\$basePath}\//' => 'href="' . $this->basePath . '/',
-			//'/{=\'([^\']*)\'[ ]*?[|][ ]*?resize:[^\}]*}/i' => '${1}',
 		);
 	}
+
 
 	protected function  getPatternsSave()
 	{
 		return array(
 			'/src="' . str_replace("/", "\/", $this->basePath) . '\//' => 'src="{$basePath}/',
 			'/href="' . str_replace("/", "\/", $this->basePath) . '\//' => 'href="{$basePath}/',
-			//'/(?:src="\{\$basePath\}\/([^"]*)"[ ]*)style="([ ]*(?:width:[ ]*(\d+)px;[ ]*)*(?:height:[ ]*(\d+)px;[ ]*)*(?:width:[ ]*(\d+)px;[ ]*)*)"/i' => 'src="{$basePath}/{=\'${1}\'|resize:${3}${5},${4}}" style="${2}" ',
+			'/(<img[^>]*)src="\{\$basePath\}\/public\/media\/([^"]*)"([ ]*)style="([ ]*(?:width:[ ]*(\d+)px;[ ]*)*(?:height:[ ]*(\d+)px;[ ]*)*(?:width:[ ]*(\d+)px;[ ]*)*)"/' => '${1}n:src="${2}, size=>\'${5}${7}x${6}\', format=>\Nette\Image::STRETCH" style="${4}"',
+			'/(<a[^>]*)href="\{\$basePath\}\/public\/media\/([^"]*)"/' => '${1}n:fhref="${2}"',
 		);
 	}
-
-
 }
