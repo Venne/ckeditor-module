@@ -13,7 +13,6 @@ namespace CkeditorModule\Listeners;
 
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Events;
-use Doctrine\ORM\Event\OnFlushEventArgs;
 use AssetsModule\Managers\AssetManager;
 use CmsModule\Events\RenderEvents;
 
@@ -47,9 +46,11 @@ class ResourcesListener implements EventSubscriber
 	}
 
 
-	public function onHeadBegin()
+	public function onHeadBegin(\CmsModule\Events\RenderArgs $args)
 	{
-		$this->assetManager->addJavascript('@CkeditorModule/ckeditor/ckeditor.js');
-		$this->assetManager->addJavascript('@CkeditorModule/editor.js');
+		if ($args->getPresenter() instanceof \CmsModule\Presenters\AdminPresenter) {
+			$this->assetManager->addJavascript('@CkeditorModule/ckeditor/ckeditor.js');
+			$this->assetManager->addJavascript('@CkeditorModule/editor.js');
+		}
 	}
 }
