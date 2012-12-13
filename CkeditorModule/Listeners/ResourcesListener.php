@@ -12,7 +12,6 @@
 namespace CkeditorModule\Listeners;
 
 use Doctrine\Common\EventSubscriber;
-use Doctrine\ORM\Events;
 use AssetsModule\Managers\AssetManager;
 use CmsModule\Events\RenderEvents;
 
