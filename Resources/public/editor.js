@@ -11,7 +11,7 @@ $(function () {
 		filebrowserImageBrowseUrl:basePath + '/admin/en/files?lang=cs&panel-tab=2&browserMode=1',
 		filebrowserWindowWidth:'1024',
 		filebrowserWindowHeight:'768',
-		height:700
+		height:550
 	};
 
 	function initCkeditor() {
