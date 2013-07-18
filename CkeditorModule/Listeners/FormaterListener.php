@@ -33,7 +33,7 @@ class FormaterListener implements EventSubscriber
 	/**
 	 * @param \Nette\DI\Container|\SystemContainer $context
 	 */
-	function __construct(\Nette\DI\Container $context)
+	public function __construct(\Nette\DI\Container $context)
 	{
 		$this->context = $context;
 		$this->basePath = $context->parameters['basePath'];
