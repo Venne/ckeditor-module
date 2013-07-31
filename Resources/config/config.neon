@@ -1,6 +1,6 @@
 services:
 	ckeditor.resourcesListener:
-		class: CkeditorModule\Listeners\ResourcesListener
+		class: CkeditorModule\Listeners\ResourcesListener(%wwwDir%)
 		tags: [listener]
 
 	ckeditor.formaterListener:

@@ -11,10 +11,11 @@
 
 namespace CkeditorModule\Listeners;
 
+use AssetsModule\JsFileCollection;
 use CmsModule\Administration\AdminPresenter;
 use Doctrine\Common\EventSubscriber;
-use AssetsModule\Managers\AssetManager;
 use CmsModule\Events\RenderEvents;
+use Venne\Module\Helpers;
 
 /**
  * @author Josef Kříž <pepakriz@gmail.com>
@@ -22,16 +23,21 @@ use CmsModule\Events\RenderEvents;
 class ResourcesListener implements EventSubscriber
 {
 
-	/** @var AssetManager */
-	protected $assetManager;
+	/** @var JsFileCollection */
+	private $jsFileCollection;
+
+	/** @var Helpers */
+	private $moduleHelpers;
+
+	/** @var string */
+	private $wwwDir;
 
 
-	/**
-	 * @param AssetManager $assetManager
-	 */
-	public function __construct(AssetManager $assetManager)
+	public function __construct($wwwDir, JsFileCollection $jsFileCollection, Helpers $moduleHelpers)
 	{
-		$this->assetManager = $assetManager;
+		$this->wwwDir = $wwwDir;
+		$this->jsFileCollection = $jsFileCollection;
+		$this->moduleHelpers = $moduleHelpers;
 	}
 
 
@@ -49,8 +55,8 @@ class ResourcesListener implements EventSubscriber
 	public function onHeadBegin(\CmsModule\Events\RenderArgs $args)
 	{
 		if ($args->getPresenter() instanceof AdminPresenter) {
-			$this->assetManager->addJavascript('@CkeditorModule/ckeditor/ckeditor.js');
-			$this->assetManager->addJavascript('@CkeditorModule/editor.js');
+			$this->jsFileCollection->addRemoteFile($args->getPresenter()->template->basePath . '/' . $this->moduleHelpers->expandResource('@ckeditorModule/ckeditor/ckeditor.js'));
+			$this->jsFileCollection->addFile($this->wwwDir . '/' . $this->moduleHelpers->expandResource('@ckeditorModule/editor.js'));
 		}
 	}
 }
