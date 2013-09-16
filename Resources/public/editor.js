@@ -24,10 +24,12 @@ $(function () {
 	}
 
 	$.nette.ext('ckeditor', {
+		load: function() {
+			initCkeditor();
+		},
 		complete:function (payload) {
 			initCkeditor();
 		}
 	});
 
-	initCkeditor();
 });
