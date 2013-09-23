@@ -16,9 +16,12 @@ $(function () {
 
 	function initCkeditor() {
 		$('textarea[venne-form-editor]').each(function () {
-			$(this).parent().prev().hide();
-			$(this).parent().css('margin-left', 0);
-			CKEDITOR.replace($(this).attr('id'), config);
+			if (!$(this).data('ckeditor')) {
+				$(this).data('ckeditor', true);
+				$(this).parent().prev().hide();
+				$(this).parent().css('margin-left', 0);
+				CKEDITOR.replace($(this).attr('id'), config);
+			}
 		});
 
 	}
