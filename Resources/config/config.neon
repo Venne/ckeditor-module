@@ -1,4 +1,9 @@
 services:
+
+	translator.translator:
+		setup:
+			- '$service->addDictionary(new TranslatorModule\Dictionary(?))'(%modules.ckeditor.path%/Resources/translations)
+
 	ckeditor.resourcesListener:
 		class: CkeditorModule\Listeners\ResourcesListener(%wwwDir%)
 		tags: [listener]
@@ -6,3 +11,20 @@ services:
 	ckeditor.formaterListener:
 		class: CkeditorModule\Listeners\FormaterListener
 		tags: [listener]
+
+	ckeditor.ckeditorFormFactory:
+		class: CkeditorModule\Forms\CkeditorFormFactory(%publicDir%/ckeditor)
+		setup:
+			- injectFactory(@cms.admin.basicFormFactory)
+
+
+factories:
+	cms.admin.ckeditorPresenter:
+		class: CkeditorModule\Presenters\CkeditorPresenter
+		tags: [presenter, administration: [
+			link: 'Cms:Admin:Ckeditor:'
+			category: 'System'
+			name: 'CKEditor'
+			description: 'SCKEditor configuration'
+			priority: -50
+		]]
