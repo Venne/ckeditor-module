@@ -25,6 +25,6 @@ factories:
 			link: 'Cms:Admin:Ckeditor:'
 			category: 'System'
 			name: 'CKEditor'
-			description: 'SCKEditor configuration'
+			description: 'CKEditor configuration'
 			priority: -50
 		]]
