@@ -154,13 +154,6 @@ class CkeditorFormFactory extends FormFactory
 
 	public function handleLoad(Form $form)
 	{
-		if (!file_exists($this->ckeditorDir)) {
-			mkdir($this->ckeditorDir, 0777, TRUE);
-		}
-		if (!file_exists($this->ckeditorDir . '/backend.json')) {
-			copy($form->presenter->context->parameters['modules']['ckeditor']['path'] . '/Resources/backend.json', $this->ckeditorDir . '/backend.json');
-		}
-
 		$data = json_decode(file_get_contents($this->ckeditorDir . '/backend.json'), TRUE);
 
 		$y = TRUE;

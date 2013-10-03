@@ -25,9 +25,20 @@ class CkeditorExtension extends CompilerExtension
 	 */
 	public function loadConfiguration()
 	{
+		$container = $this->getContainerBuilder();
 		$this->compiler->parseServices(
 			$this->getContainerBuilder(),
 			$this->loadFromFile(dirname(dirname(__DIR__)) . '/Resources/config/config.neon')
 		);
+
+		$ckeditorDir = $container->parameters['publicDir'] . '/ckeditor';
+
+
+		if (!file_exists($ckeditorDir)) {
+			mkdir($ckeditorDir, 0777, TRUE);
+		}
+		if (!file_exists($ckeditorDir . '/backend.json')) {
+			copy($container->parameters['modules']['ckeditor']['path'] . '/Resources/backend.json', $ckeditorDir . '/backend.json');
+		}
 	}
 }
