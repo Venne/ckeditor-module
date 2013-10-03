@@ -58,7 +58,7 @@ class CkeditorPresenter extends BasePresenter
 			return;
 		}
 
-		$this->flashMessage('Configuration has been saved.', 'success');
+		$this->flashMessage($this->translator->translate('Configuration has been saved.'), 'success');
 
 		if (!$this->isAjax()) {
 			$this->redirect('this');
