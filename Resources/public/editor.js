@@ -15,9 +15,19 @@ $(function () {
 
 				var _this = $(this);
 
+				var url = basePath + '/admin/en/files?lang=cs&panel-tab=2&browserMode=1';
+
+				if ($(this).attr('data-cms-page')) {
+					url = url + '&page=' + $(this).attr('data-cms-page') + '&type=page';
+				}
+
+				if ($(this).attr('data-cms-route')) {
+					url = url + '&route=' + $(this).attr('data-cms-route') + '&type=route';
+				}
+
 				var config = {
-					filebrowserBrowseUrl: basePath + '/admin/en/files?lang=cs&panel-tab=2&browserMode=1',
-					filebrowserImageBrowseUrl: basePath + '/admin/en/files?lang=cs&panel-tab=2&browserMode=1',
+					filebrowserBrowseUrl: url,
+					filebrowserImageBrowseUrl: url,
 					filebrowserWindowWidth: '1024',
 					filebrowserWindowHeight: '768',
 					height: 550
