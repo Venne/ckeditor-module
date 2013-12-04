@@ -78,11 +78,15 @@ class FormaterListener implements EventSubscriber
 	public function onContentEditorRender(ContentEditorArgs $args)
 	{
 		$value = $args->getValue();
+		$presenter = $this->context->application->getPresenter();
 
-		$template = $this->context->application->getPresenter()->createTemplate('Nette\Templating\Template');
+		$snippetMode = $presenter->snippetMode;
+		$presenter->snippetMode = NULL;
+		$template = $presenter->createTemplate('Nette\Templating\Template');
 		$template->setSource($value);
 
 		$args->setValue($template->__toString());
+		$presenter->snippetMode = $snippetMode;
 	}
 
 
