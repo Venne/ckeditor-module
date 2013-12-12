@@ -106,7 +106,7 @@ class FormaterListener implements EventSubscriber
 		return array(
 			'/src="' . str_replace("/", "\/", $this->basePath) . '\//' => 'src="{$basePath}/',
 			'/href="' . str_replace("/", "\/", $this->basePath) . '\//' => 'href="{$basePath}/',
-			'/(<img[^>]*)src="\{\$basePath\}\/public\/media\/([^"]*)"([ ]*)style="([ ]*(?:width:[ ]*(\d+)px;[ ]*)*(?:height:[ ]*(\d+)px;[ ]*)*(?:width:[ ]*(\d+)px;[ ]*)*)"/' => '${1}n:src="${2}, size=>\'${5}${7}x${6}\', format=>\Nette\Image::STRETCH" style="${4}"',
+			'/(<img[^>]*)src="\{\$basePath\}\/public\/media\/([^"]*)"([ ]*)style="([ ]*(?:width:[ ]*(\d+)px;[ ]*)*(?:height:[ ]*(\d+)px;[ ]*)*(?:width:[ ]*(\d+)px[;]*[ ]*)*)"[ ]*/' => '${1}n:src="${2}, size=>\'${5}${7}x${6}\', format=>\Nette\Image::STRETCH" style="${4}" ',
 			'/(<a[^>]*)href="\{\$basePath\}\/public\/media\/([^"]*)"/' => '${1}n:fhref="${2}"',
 		);
 	}
