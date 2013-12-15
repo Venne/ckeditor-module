@@ -20,7 +20,7 @@ use Venne\Forms\FormFactory;
 /**
  * @author Josef Kříž <pepakriz@gmail.com>
  */
-class CkeditorFormFactory extends FormFactory
+class ToolbarFormFactory extends FormFactory
 {
 
 	/** @var string */

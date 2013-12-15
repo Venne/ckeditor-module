@@ -11,7 +11,8 @@
 
 namespace CkeditorModule\Presenters;
 
-use CkeditorModule\Forms\CkeditorFormFactory;
+use CkeditorModule\Forms\ContentFormFactory;
+use CkeditorModule\Forms\ToolbarFormFactory;
 use CmsModule\Administration\Presenters\BasePresenter;
 use Venne\Forms\Form;
 
@@ -23,16 +24,24 @@ use Venne\Forms\Form;
 class CkeditorPresenter extends BasePresenter
 {
 
-	/** @var CkeditorFormFactory */
-	protected $ckeditorFormFactory;
+	/** @var ContentFormFactory */
+	private $contentFormFactory;
+
+	/** @var ToolbarFormFactory */
+	private $toolbarFormFactory;
 
 
 	/**
-	 * @param CkeditorFormFactory $ckeditorFormFactory
+	 * @param ContentFormFactory $contentFormFactory
+	 * @param ToolbarFormFactory $toolbarFormFactory
 	 */
-	public function injectCkeditorFormFactory(CkeditorFormFactory $ckeditorFormFactory)
+	public function inject(
+		ContentFormFactory $contentFormFactory,
+		ToolbarFormFactory $toolbarFormFactory
+	)
 	{
-		$this->ckeditorFormFactory = $ckeditorFormFactory;
+		$this->contentFormFactory = $contentFormFactory;
+		$this->toolbarFormFactory = $toolbarFormFactory;
 	}
 
 
@@ -44,9 +53,25 @@ class CkeditorPresenter extends BasePresenter
 	}
 
 
-	protected function createComponentForm()
+	/**
+	 * @secured(privilege="show")
+	 */
+	public function actionToolbar()
 	{
-		$form = $this->ckeditorFormFactory->invoke();
+	}
+
+
+	protected function createComponentContentForm()
+	{
+		$form = $this->contentFormFactory->invoke();
+		$form->onSuccess[] = $this->formSuccess;
+		return $form;
+	}
+
+
+	protected function createComponentToolbarForm()
+	{
+		$form = $this->toolbarFormFactory->invoke();
 		$form->onSuccess[] = $this->formSuccess;
 		return $form;
 	}

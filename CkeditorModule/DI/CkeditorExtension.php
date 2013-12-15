@@ -19,6 +19,12 @@ use Nette\Config\CompilerExtension;
 class CkeditorExtension extends CompilerExtension
 {
 
+	/** @var array */
+	public $defaults = array(
+		'autoThumbnails' => TRUE,
+		'autoLightbox' => TRUE,
+	);
+
 	/**
 	 * Processes configuration data. Intended to be overridden by descendant.
 	 * @return void
@@ -30,9 +36,14 @@ class CkeditorExtension extends CompilerExtension
 			$this->getContainerBuilder(),
 			$this->loadFromFile(dirname(dirname(__DIR__)) . '/Resources/config/config.neon')
 		);
-
+		$config = $this->getConfig($this->defaults);
 		$ckeditorDir = $container->parameters['publicDir'] . '/ckeditor';
 
+		$container->addDefinition($this->prefix('formaterListener'))
+			->setClass('CkeditorModule\Listeners\FormaterListener')
+			->addSetup('setEnableThumbnails', array($config['autoThumbnails']))
+			->addSetup('setEnableLightbox', array($config['autoLightbox']))
+			->addTag('listener');
 
 		if (!file_exists($ckeditorDir)) {
 			mkdir($ckeditorDir, 0777, TRUE);

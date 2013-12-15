@@ -8,12 +8,13 @@ services:
 		class: CkeditorModule\Listeners\ResourcesListener(%wwwDir%)
 		tags: [listener]
 
-	ckeditor.formaterListener:
-		class: CkeditorModule\Listeners\FormaterListener
-		tags: [listener]
+	ckeditor.toolbarFormFactory:
+		class: CkeditorModule\Forms\ToolbarFormFactory(%publicDir%/ckeditor)
+		setup:
+			- injectFactory(@cms.admin.basicFormFactory)
 
-	ckeditor.ckeditorFormFactory:
-		class: CkeditorModule\Forms\CkeditorFormFactory(%publicDir%/ckeditor)
+	ckeditor.contentFormFactory:
+		class: CkeditorModule\Forms\ContentFormFactory
 		setup:
 			- injectFactory(@cms.admin.basicFormFactory)
 
